@@ -6,4 +6,4 @@
  * 	and GPLv3 (http://opensource.org/licenses/gpl-3.0.html) licenses.
  */
 
-module.exports = require("./xml-rpc-request");
+module.exports = require("./modules/xml-rpc-request");
