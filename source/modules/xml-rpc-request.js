@@ -16,7 +16,7 @@ var XmlRpc = require("./xml-rpc")
 function XmlRpcRequest(url, method) {
 	this.serviceUrl = url;
 	this.methodName = method;
-	this.crossDomain = false;
+	this.crossDomain = true;
 	this.withCredentials = false;	
 	this.params = [];
 	this.headers = {};
