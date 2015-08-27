@@ -17,7 +17,7 @@ function XmlRpcRequest(url, method) {
 	this.serviceUrl = url;
 	this.methodName = method;
 	this.crossDomain = true;
-	this.withCredentials = false;	
+	this.withCredentials = true;	
 	this.params = [];
 	this.headers = {};
 };
