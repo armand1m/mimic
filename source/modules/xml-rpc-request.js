@@ -17,7 +17,7 @@ function XmlRpcRequest(url, method) {
 	this.serviceUrl = url;
 	this.methodName = method;
 	this.crossDomain = true;
-	this.withCredentials = true;	
+	this.withCredentials = false;	
 	this.params = [];
 	this.headers = {};
 };
@@ -83,25 +83,30 @@ XmlRpcRequest.prototype.setHeader = function(name, value) {
  * @return XmlRpcResponse object.
  */
 XmlRpcRequest.prototype.send = function() {
+	
 	// Vars
 	var xml_params = "", 
 	    i = 0, 
 	    xml_call, xhr;
+    
     // XMLRPC
 	for (i = 0; i < this.params.length; i++) {
 		xml_params += XmlRpc.PARAM.replace("${DATA}", this.marshal(this.params[i]));
 	}
 	xml_call = XmlRpc.REQUEST.replace("${METHOD}", this.methodName);
 	xml_call = XmlRpc.PROLOG + xml_call.replace("${DATA}", xml_params);	
+	
 	// XHR
 	xhr = Builder.buildXHR(this.crossDomain);
 	xhr.open("POST", this.serviceUrl, false);	
+	
 	// HTTP headers
 	for(i in this.headers) {
 	    if (this.headers.hasOwnProperty(i)) {
 		  xhr.setRequestHeader(i, this.headers[i]);
 		}
 	}		
+	
 	// HTTP credentials 
 	if(this.withCredentials && "withCredentials" in xhr) {
 		xhr.withCredentials = true;
